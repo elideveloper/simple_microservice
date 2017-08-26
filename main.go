@@ -1,10 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"net/http"
+	"simple_microservice/service"
 )
 
 func main() {
+	svc := service.NewService()
+	eps := service.MakeEndpoints(svc)
+	h := service.MakeHTTPHandler(eps)
 
-	fmt.Println("Hello =)")
+	http.ListenAndServe(":8080", h)
 }
