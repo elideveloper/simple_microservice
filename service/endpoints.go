@@ -4,6 +4,7 @@ import (
 	"context"
 	"simple_microservice/requests"
 	//"simple_microservice/responses"
+	"github.com/go-kit/kit/log"
 
 	"github.com/go-kit/kit/endpoint"
 )
@@ -15,7 +16,7 @@ type Endpoints struct {
 	Update endpoint.Endpoint
 }
 
-func MakeEndpoints(svc ExampleServer) *Endpoints {
+func MakeEndpoints(svc ExampleServer, logger log.Logger) *Endpoints {
 	eps := &Endpoints{}
 	eps.Add = func(ctx context.Context, req interface{}) (interface{}, error) {
 		r := req.(requests.Add)
@@ -33,5 +34,8 @@ func MakeEndpoints(svc ExampleServer) *Endpoints {
 		r := req.(requests.Delete)
 		return svc.Delete(&r)
 	}
+
+	eps.Get = LoggingMiddleware(logger)(eps.Get)
+
 	return eps
 }
