@@ -1,7 +1,7 @@
 package requests
 
 import (
-	"simple_microservice/models"
+	"github.com/elideveloper/simple_microservice/models"
 )
 
 type Get struct {

@@ -3,7 +3,8 @@ package main
 import (
 	"net/http"
 	"os"
-	"simple_microservice/service"
+
+	"github.com/elideveloper/simple_microservice/service"
 
 	"github.com/go-kit/kit/log"
 )

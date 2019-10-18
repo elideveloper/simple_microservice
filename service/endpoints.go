@@ -2,8 +2,10 @@ package service
 
 import (
 	"context"
-	"simple_microservice/requests"
-	//"simple_microservice/responses"
+
+	"github.com/elideveloper/simple_microservice/requests"
+
+	//"github.com/elideveloper/simple_microservice/responses"
 	"github.com/go-kit/kit/log"
 
 	"github.com/go-kit/kit/endpoint"

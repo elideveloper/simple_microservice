@@ -1,7 +1,7 @@
 package responses
 
 import (
-	"simple_microservice/models"
+	"github.com/elideveloper/simple_microservice/models"
 )
 
 // universal format for responses

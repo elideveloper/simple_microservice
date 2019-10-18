@@ -5,9 +5,10 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"simple_microservice/requests"
-	"simple_microservice/responses"
 	"strconv"
+
+	"github.com/elideveloper/simple_microservice/requests"
+	"github.com/elideveloper/simple_microservice/responses"
 
 	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"

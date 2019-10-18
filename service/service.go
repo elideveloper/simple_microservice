@@ -3,9 +3,10 @@ package service
 import (
 	//"fmt"
 	"errors"
-	"simple_microservice/models"
-	"simple_microservice/requests"
-	"simple_microservice/responses"
+
+	"github.com/elideveloper/simple_microservice/models"
+	"github.com/elideveloper/simple_microservice/requests"
+	"github.com/elideveloper/simple_microservice/responses"
 )
 
 type ExampleServer interface {
