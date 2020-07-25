@@ -17,16 +17,16 @@ type ExampleServer interface {
 }
 
 type exampleService struct {
-	usersMap map[int]*models.Person
+	usersMap map[int]*models.User
 	incID    int
 }
 
 func NewService() ExampleServer {
-	return &exampleService{make(map[int]*models.Person), 1}
+	return &exampleService{make(map[int]*models.User), 1}
 }
 
 func (svc *exampleService) Add(req *requests.Add) (*responses.Add, error) {
-	svc.usersMap[svc.incID] = &req.Person
+	svc.usersMap[svc.incID] = &req.User
 	svc.incID++
 	return &responses.Add{true}, nil
 }
@@ -41,7 +41,7 @@ func (svc exampleService) Get(req *requests.Get) (*responses.Get, error) {
 
 func (svc exampleService) Update(req *requests.Update) (*responses.Update, error) {
 	if _, exists := svc.usersMap[req.ID]; exists {
-		svc.usersMap[req.ID] = &req.Person
+		svc.usersMap[req.ID] = &req.User
 	} else {
 		return nil, errors.New("No such user.")
 	}

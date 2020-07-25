@@ -11,7 +11,7 @@ type General struct {
 }
 
 type Get struct {
-	models.Person
+	models.User
 }
 
 type Add struct {

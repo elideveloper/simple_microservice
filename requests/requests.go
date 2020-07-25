@@ -5,16 +5,16 @@ import (
 )
 
 type Get struct {
-	ID int `json:"person_id"`
+	ID int `json:"user_id"`
 }
 
 type Add struct {
-	models.Person
+	models.User
 }
 
 type Update struct {
 	ID int
-	models.Person
+	models.User
 }
 
 type Delete struct {
