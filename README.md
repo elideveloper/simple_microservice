@@ -4,7 +4,7 @@ From _current_ path
 
 ```bash
 docker build .
-docker run -a stdin -a stdout -it -p 8080:8080 _dockerimage_
+docker run -a stdin -a stdout -it -p 8080:8080 docker_image
 ```
 
 POST /create
