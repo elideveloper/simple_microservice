@@ -9,6 +9,8 @@ import (
 	"github.com/elideveloper/simple_microservice/responses"
 )
 
+var ErrUserNotFound error = errors.New("No such user")
+
 type ExampleServer interface {
 	Get(req *requests.Get) (*responses.Get, error)
 	Add(req *requests.Add) (*responses.Add, error)
@@ -22,28 +24,30 @@ type exampleService struct {
 }
 
 func NewService() ExampleServer {
-	return &exampleService{make(map[int]*models.User), 1}
+	return &exampleService{make(map[int]*models.User), 0}
 }
 
 func (svc *exampleService) Add(req *requests.Add) (*responses.Add, error) {
-	svc.usersMap[svc.incID] = &req.User
 	svc.incID++
-	return &responses.Add{true}, nil
+	req.Id = svc.incID
+	svc.usersMap[svc.incID] = &req.User
+
+	return &responses.Add{req.User}, nil
 }
 
 func (svc exampleService) Get(req *requests.Get) (*responses.Get, error) {
 	if p, exists := svc.usersMap[req.ID]; exists {
 		return &responses.Get{*p}, nil
-	} else {
-		return nil, errors.New("No such user.")
 	}
+
+	return nil, ErrUserNotFound
 }
 
 func (svc exampleService) Update(req *requests.Update) (*responses.Update, error) {
 	if _, exists := svc.usersMap[req.ID]; exists {
 		svc.usersMap[req.ID] = &req.User
 	} else {
-		return nil, errors.New("No such user.")
+		return nil, ErrUserNotFound
 	}
 	return &responses.Update{true}, nil
 }
@@ -52,7 +56,7 @@ func (svc *exampleService) Delete(req *requests.Delete) (*responses.Delete, erro
 	if _, exists := svc.usersMap[req.ID]; exists {
 		delete(svc.usersMap, req.ID)
 	} else {
-		return nil, errors.New("No such user.")
+		return nil, ErrUserNotFound
 	}
 	return &responses.Delete{true}, nil
 }

@@ -15,7 +15,7 @@ type Get struct {
 }
 
 type Add struct {
-	Success bool `json:"success"`
+	models.User
 }
 
 type Update struct {
