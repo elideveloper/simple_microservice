@@ -11,10 +11,16 @@ type Middleware func(endpoint.Endpoint) endpoint.Endpoint
 
 func LoggingMiddleware(logger log.Logger) Middleware {
 	return func(next endpoint.Endpoint) endpoint.Endpoint {
-		return func(ctx context.Context, request interface{}) (interface{}, error) {
-			resp, err := next(ctx, request)
-			logger.Log("Error:", err)
-			return resp, err
+		return func(ctx context.Context, request interface{}) (resp interface{}, err error) {
+			defer func() {
+				r := recover()
+				if r != nil {
+					logger.Log("panic:", r)
+				} else if err != nil {
+					logger.Log("error:", err)
+				}
+			}()
+			return next(ctx, request)
 		}
 	}
 }
