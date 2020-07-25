@@ -1,2 +1,19 @@
 # simple_microservice
-go-kit is used
+
+From _current_ path
+
+```bash
+docker build .
+docker run -a stdin -a stdout -it -p 8080:8080 docker_image
+```
+
+POST /create
+```json
+{
+	"first_name":"Mihail",
+	"last_name" : "Petrovich",
+	"age":33
+}
+```
+
+GET /get?user_id=1

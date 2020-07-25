@@ -14,6 +14,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const userIdUrlParam = "user_id"
+
 func MakeHTTPHandler(eps *Endpoints) http.Handler {
 	h := mux.NewRouter()
 	op := httptransport.ServerErrorEncoder(encodeError)
@@ -47,7 +49,7 @@ func decodeGet(_ context.Context, r *http.Request) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	id := r.Form.Get("person_id")
+	id := r.Form.Get(userIdUrlParam)
 	id_int, err := strconv.Atoi(id)
 	if err != nil {
 		return nil, err
@@ -68,13 +70,13 @@ func decodeUpdate(_ context.Context, r *http.Request) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	id := r.Form.Get("person_id")
+	id := r.Form.Get(userIdUrlParam)
 	id_int, err := strconv.Atoi(id)
 	if err != nil {
 		return nil, err
 	}
 	req := requests.Update{}
-	if err := json.NewDecoder(r.Body).Decode(&req.Person); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&req.User); err != nil {
 		return nil, err
 	}
 	req.ID = id_int
@@ -86,7 +88,7 @@ func decodeDelete(_ context.Context, r *http.Request) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	id := r.Form.Get("person_id")
+	id := r.Form.Get(userIdUrlParam)
 	id_int, err := strconv.Atoi(id)
 	if err != nil {
 		return nil, err

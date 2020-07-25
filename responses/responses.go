@@ -11,11 +11,11 @@ type General struct {
 }
 
 type Get struct {
-	models.Person
+	models.User
 }
 
 type Add struct {
-	Success bool `json:"success"`
+	models.User
 }
 
 type Update struct {
