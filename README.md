@@ -1,8 +1,11 @@
 # simple_microservice
 
 From _current_ path
+
+```bash
 docker build .
 docker run -a stdin -a stdout -it -p 8080:8080 _dockerimage_
+```
 
 POST /create
 ```json
